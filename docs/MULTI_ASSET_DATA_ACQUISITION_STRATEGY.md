@@ -18,10 +18,10 @@ Future multi-asset planning covers:
 - Bitcoin
 - EUR/USD
 
-US Equities / ETFs remain the first execution market from the current approved
-roadmap. Multi-asset expansion must not bypass local CSV validation maturity,
-data quality governance, source reliability controls, or explicit future
-implementation approval.
+US Equities / ETFs remain the first execution market using Daily EOD local CSV
+under the current approved roadmap. Multi-asset expansion must not bypass local
+CSV validation maturity, data quality governance, source reliability controls,
+or explicit future implementation approval.
 
 ## Data-Source Tiers
 
@@ -36,6 +36,26 @@ implementation approval.
   detection.
 - Tier 5: Future internal curated datasets after source governance, quality
   gates, and storage rules exist.
+
+## Cross-Source Validation Governance
+
+A cross-source validation policy contract exists for future planning. A cross-source validation policy evaluation gate exists for metadata-only planning readiness only.
+These boundaries check planned source roles and asset-specific
+references before any future data-source planning step.
+
+They do not:
+
+- validate real data
+- select or approve any provider
+- approve source reliability
+- verify historical reliability
+- assign VERIFIED_HISTORICAL
+- approve production use
+- run ingestion
+- execute the Data Quality Gate
+- run engine logic
+- produce market analysis, trading output, buy/sell output, or financial
+  conclusions
 
 ## Asset-Specific Requirements
 
@@ -126,6 +146,7 @@ source reliability approval, or permission for financial conclusions.
 ## Future Implementation Gates
 
 - Local CSV path must remain first.
+- Asset-specific requirements must exist before multi-asset implementation.
 - Real local CSV batch execution must be separately scoped.
 - Managed API fetch must be separately scoped.
 - Provider access verification must be separately scoped.

@@ -20,8 +20,21 @@ def test_strategy_records_coverage_and_current_first_execution_market() -> None:
     for text in ["Gold", "Oil", "Bitcoin", "EUR/USD"]:
         assert text in strategy
 
-    assert "US Equities / ETFs remain the first execution market" in strategy
+    assert (
+        "US Equities / ETFs remain the first execution market using Daily EOD local CSV"
+        in strategy
+    )
     assert "strategy and governance only, not implementation" in strategy
+
+
+def test_strategy_records_future_multi_asset_scope_only() -> None:
+    strategy = _strategy_text()
+
+    assert "Future multi-asset planning covers" in strategy
+    for text in ["Gold", "Oil", "Bitcoin", "EUR/USD"]:
+        assert text in strategy
+
+    assert "Asset-specific requirements must exist before multi-asset implementation" in strategy
 
 
 def test_strategy_includes_required_data_source_tiers() -> None:
@@ -74,6 +87,33 @@ def test_strategy_records_provider_and_quality_gate_non_approval_boundaries() ->
         assert text in strategy
 
 
+def test_strategy_links_cross_source_policy_and_evaluation_gate_boundaries() -> None:
+    strategy = _strategy_text()
+
+    required_text = [
+        "cross-source validation policy contract exists for future planning",
+        "cross-source validation policy evaluation gate exists for metadata-only planning readiness only",
+        "metadata-only planning",
+        "They do not:",
+        "validate real data",
+        "select or approve any provider",
+        "approve source reliability",
+        "verify historical reliability",
+        "assign VERIFIED_HISTORICAL",
+        "approve production use",
+        "run ingestion",
+        "execute the Data Quality Gate",
+        "run engine logic",
+        "produce market analysis",
+        "trading output",
+        "buy/sell output",
+        "financial conclusions",
+    ]
+
+    for text in required_text:
+        assert text in strategy
+
+
 def test_strategy_includes_data_quality_requirements() -> None:
     strategy = _strategy_text()
 
@@ -115,6 +155,23 @@ def test_strategy_forbids_implementation_and_market_output_surfaces() -> None:
 
     for text in required_text:
         assert text in strategy
+
+
+def test_strategy_does_not_imply_production_or_real_data_readiness() -> None:
+    strategy = _strategy_text()
+
+    forbidden_text = [
+        "production-ready",
+        "real-data ready",
+        "real datasets exist",
+        "providers are selected",
+        "providers are approved",
+        "system can already analyze live markets",
+        "live market analysis",
+    ]
+
+    for text in forbidden_text:
+        assert text not in strategy.lower()
 
 
 def test_strategy_records_future_implementation_gates() -> None:
