@@ -100,6 +100,8 @@ Planned public-safe directions include:
 
 - Strengthen daily data quality checks and evidence records.
 - Expand local CSV validation examples using synthetic or public-safe fixtures.
+- Maintain the public-safe multi-asset data acquisition strategy in
+  `docs/MULTI_ASSET_DATA_ACQUISITION_STRATEGY.md` as governance only.
 - Add clearer reporting around dataset eligibility and quality gate outcomes.
 - Add an AI-ready explainability roadmap that explains verified engine outputs
   without creating unsupported conclusions.
