@@ -57,3 +57,15 @@ Desktop.ini
 .vscode/
 *.swp
 *.swo
+
+# Public-safe/private-boundary protection
+*.env
+*.pyo
+artifacts/
+*.key
+*.pem
+*.p12
+*.pfx
+secrets*
+credentials*
+token*
