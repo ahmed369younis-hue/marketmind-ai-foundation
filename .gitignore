@@ -1,0 +1,59 @@
+# Private project authority
+PROJECT_MEMORY.md
+
+# Environment files and secrets
+.env
+.env.*
+!.env.example
+
+# Python generated files
+__pycache__/
+*.pyc
+*.py[cod]
+*$py.class
+.python-version
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Test, lint, and coverage caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.cache/
+.coverage
+coverage/
+htmlcov/
+
+# Build outputs
+dist/
+build/
+*.egg-info/
+
+# Local data, artifacts, and logs
+artifacts/*
+!artifacts/.gitkeep
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+*.db
+*.sqlite
+*.sqlite3
+*.duckdb
+*.log
+logs/
+
+# JavaScript dependencies, if tooling is added later
+node_modules/
+
+# OS and editor junk
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/
+*.swp
+*.swo
