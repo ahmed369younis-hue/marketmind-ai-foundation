@@ -1,5 +1,7 @@
 # MarketMind AI
 
+[![CI](https://github.com/ahmed369younis-hue/marketmind-ai-foundation/actions/workflows/ci.yml/badge.svg)](https://github.com/ahmed369younis-hue/marketmind-ai-foundation/actions/workflows/ci.yml)
+
 MarketMind AI is an **Engine-first Smart Money Intelligence Platform**
 foundation. This public repository presents the deterministic core contracts,
 data quality governance, validation boundaries, and early engine utilities that
