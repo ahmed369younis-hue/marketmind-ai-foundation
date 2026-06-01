@@ -70,6 +70,7 @@ def test_phase1_forbidden_production_surfaces_are_absent() -> None:
     services_files = _python_files(APP_ROOT / "services")
     allowed_data_files = {
         APP_ROOT / "data" / "__init__.py",
+        APP_ROOT / "data" / "asset_data_requirements_evaluation.py",
         APP_ROOT / "data" / "local_csv_batch_run.py",
         APP_ROOT / "data" / "local_csv_ingestion.py",
         APP_ROOT / "data" / "local_csv_quality_validation.py",
