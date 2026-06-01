@@ -328,7 +328,7 @@ def _flag_role_match(
     flag: bool,
     role: SourceValidationRole,
 ) -> bool:
-    return not flag or _has_role(policy, role)
+    return _has_role(policy, role) is flag
 
 
 def _has_role(

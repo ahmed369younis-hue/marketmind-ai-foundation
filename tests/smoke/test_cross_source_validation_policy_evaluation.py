@@ -191,6 +191,22 @@ def test_readiness_is_false_when_any_required_check_fails() -> None:
     assert is_cross_source_policy_ready_for_data_source_planning(policy) is False
 
 
+def test_required_roles_check_rejects_role_flag_mismatches() -> None:
+    policy = _policy(MarketAsset.US_EQUITIES_ETFS)
+    broken = replace(
+        policy,
+        required_source_roles=policy.required_source_roles
+        + (SourceValidationRole.FX_QUOTE_REFERENCE,),
+    )
+    results = evaluate_cross_source_validation_policy(broken)
+
+    assert _result_for(
+        results,
+        CrossSourceValidationPolicyEvaluationCheck.REQUIRED_ROLES_CHECK,
+    ).passed is False
+    assert is_cross_source_policy_ready_for_data_source_planning(broken) is False
+
+
 def test_us_equities_etfs_role_requirements_are_enforced() -> None:
     policy = _policy(MarketAsset.US_EQUITIES_ETFS)
     results = evaluate_cross_source_validation_policy(policy)
@@ -216,6 +232,16 @@ def test_us_equities_etfs_role_requirements_are_enforced() -> None:
         CrossSourceValidationPolicyEvaluationCheck.ASSET_SPECIFIC_REFERENCE_CHECK,
     ).passed is False
 
+    disallowed_fx_role = replace(
+        policy,
+        required_source_roles=policy.required_source_roles
+        + (SourceValidationRole.FX_QUOTE_REFERENCE,),
+    )
+    assert _result_for(
+        evaluate_cross_source_validation_policy(disallowed_fx_role),
+        CrossSourceValidationPolicyEvaluationCheck.REQUIRED_ROLES_CHECK,
+    ).passed is False
+
 
 def test_gold_and_oil_contract_specification_and_roll_requirements_are_enforced() -> None:
     for asset in [MarketAsset.GOLD, MarketAsset.OIL]:
@@ -235,6 +261,16 @@ def test_gold_and_oil_contract_specification_and_roll_requirements_are_enforced(
         assert _result_for(
             evaluate_cross_source_validation_policy(broken),
             CrossSourceValidationPolicyEvaluationCheck.ASSET_SPECIFIC_REFERENCE_CHECK,
+        ).passed is False
+
+        disallowed_crypto_role = replace(
+            policy,
+            required_source_roles=policy.required_source_roles
+            + (SourceValidationRole.CRYPTO_EXCHANGE_CROSS_CHECK_SOURCE,),
+        )
+        assert _result_for(
+            evaluate_cross_source_validation_policy(disallowed_crypto_role),
+            CrossSourceValidationPolicyEvaluationCheck.REQUIRED_ROLES_CHECK,
         ).passed is False
 
 
@@ -258,6 +294,16 @@ def test_bitcoin_exchange_cross_check_and_fragmented_volume_requirements_are_enf
     assert _result_for(
         evaluate_cross_source_validation_policy(broken_volume),
         CrossSourceValidationPolicyEvaluationCheck.VOLUME_CONSISTENCY_POLICY_CHECK,
+    ).passed is False
+
+    disallowed_fx_role = replace(
+        policy,
+        required_source_roles=policy.required_source_roles
+        + (SourceValidationRole.FX_QUOTE_REFERENCE,),
+    )
+    assert _result_for(
+        evaluate_cross_source_validation_policy(disallowed_fx_role),
+        CrossSourceValidationPolicyEvaluationCheck.REQUIRED_ROLES_CHECK,
     ).passed is False
 
 
@@ -288,6 +334,16 @@ def test_eur_usd_fx_quote_and_liquidity_proxy_requirements_are_enforced() -> Non
     assert _result_for(
         evaluate_cross_source_validation_policy(broken_volume),
         CrossSourceValidationPolicyEvaluationCheck.VOLUME_CONSISTENCY_POLICY_CHECK,
+    ).passed is False
+
+    disallowed_crypto_role = replace(
+        policy,
+        required_source_roles=policy.required_source_roles
+        + (SourceValidationRole.CRYPTO_EXCHANGE_CROSS_CHECK_SOURCE,),
+    )
+    assert _result_for(
+        evaluate_cross_source_validation_policy(disallowed_crypto_role),
+        CrossSourceValidationPolicyEvaluationCheck.REQUIRED_ROLES_CHECK,
     ).passed is False
 
 
