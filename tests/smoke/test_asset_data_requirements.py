@@ -29,7 +29,7 @@ def _valid_requirements(**overrides: object) -> AssetDataRequirements:
         "requires_contract_selection_policy": False,
         "requires_twenty_four_seven_calendar": False,
         "requires_exchange_source_policy": False,
-        "requires_cross_source_validation": False,
+        "requires_cross_source_validation": True,
         "requires_liquidity_proxy": False,
         "requires_timezone_policy": True,
         "requires_session_policy": True,
@@ -138,6 +138,7 @@ def test_us_equities_etfs_require_equity_style_policies_without_futures_or_fx_as
     assert requirements.volume_model is VolumeModel.ETF_REPORTED_VOLUME
     assert requirements.requires_adjusted_price_policy is True
     assert requirements.requires_corporate_action_policy is True
+    assert requirements.requires_cross_source_validation is True
     assert requirements.requires_roll_logic is False
     assert requirements.requires_twenty_four_seven_calendar is False
     assert requirements.requires_liquidity_proxy is False

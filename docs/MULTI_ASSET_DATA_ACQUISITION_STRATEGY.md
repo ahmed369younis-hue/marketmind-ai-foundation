@@ -59,6 +59,15 @@ They do not:
 
 ## Asset-Specific Requirements
 
+### US Equities / ETFs
+
+- First execution market using Daily EOD local CSV.
+- Requires exchange/ETF session governance for the first execution market.
+- Requires adjusted/unadjusted price policy and corporate action policy.
+- Requires independent cross-source planning before reliability claims.
+- Requires timestamp, price, and volume consistency planning.
+- Does not require futures roll, FX quote validation, or crypto exchange cross-check policy.
+
 ### Gold
 
 - Early path may use ETF-style proxy planning before direct spot or futures

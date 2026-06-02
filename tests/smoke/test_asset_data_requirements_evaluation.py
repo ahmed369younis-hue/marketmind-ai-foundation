@@ -152,9 +152,24 @@ def test_us_equities_etfs_is_only_first_execution_market() -> None:
     requirements_by_asset = build_default_asset_data_requirements()
 
     assert requirements_by_asset[MarketAsset.US_EQUITIES_ETFS].is_first_execution_market is True
+    assert (
+        requirements_by_asset[MarketAsset.US_EQUITIES_ETFS].requires_cross_source_validation
+        is True
+    )
     assert is_asset_ready_for_data_source_planning(
         requirements_by_asset[MarketAsset.US_EQUITIES_ETFS]
     ) is True
+
+    broken = replace(
+        requirements_by_asset[MarketAsset.US_EQUITIES_ETFS],
+        requires_cross_source_validation=False,
+    )
+    cross_source_result = _result_for(
+        evaluate_asset_data_requirements(broken),
+        AssetDataRequirementsEvaluationCheck.CROSS_SOURCE_VALIDATION_CHECK,
+    )
+    assert cross_source_result.passed is False
+    assert is_asset_ready_for_data_source_planning(broken) is False
 
     for asset in [
         MarketAsset.GOLD,

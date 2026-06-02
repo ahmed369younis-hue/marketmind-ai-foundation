@@ -183,9 +183,6 @@ def _source_policy_passed(requirements: AssetDataRequirements) -> bool:
 
 
 def _cross_source_validation_passed(requirements: AssetDataRequirements) -> bool:
-    if requirements.asset == MarketAsset.US_EQUITIES_ETFS:
-        return not requirements.requires_cross_source_validation
-
     return requirements.requires_cross_source_validation
 
 

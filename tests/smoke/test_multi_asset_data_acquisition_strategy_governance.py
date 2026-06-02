@@ -24,6 +24,8 @@ def test_strategy_records_coverage_and_current_first_execution_market() -> None:
         "US Equities / ETFs remain the first execution market using Daily EOD local CSV"
         in strategy
     )
+    assert "Requires exchange/ETF session governance for the first execution market" in strategy
+    assert "Requires independent cross-source planning before reliability claims" in strategy
     assert "strategy and governance only, not implementation" in strategy
 
 
@@ -56,6 +58,7 @@ def test_strategy_includes_required_data_source_tiers() -> None:
 def test_strategy_records_asset_specific_differences() -> None:
     strategy = _strategy_text()
 
+    assert "Does not require futures roll, FX quote validation, or crypto exchange cross-check policy" in strategy
     assert "Gold futures later require contract expiry and roll logic" in strategy
     assert "Oil futures later require contract expiry, roll logic" in strategy
     assert "Requires 24/7 calendar handling" in strategy
